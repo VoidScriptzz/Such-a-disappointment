@@ -71,7 +71,7 @@ local newBtn = createButton("New", 0.52)
 
 oldBtn.MouseButton1Click:Connect(function()
     oldBtn.Text = "Loading..."
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()
+    loadstring(game:HttpGet("loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub2/refs/heads/main/MainLoader"))()", true))()
     oldBtn.Text = "Executed!"
     task.wait(1)
     gui:Destroy()
