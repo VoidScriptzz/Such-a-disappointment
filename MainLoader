@@ -69,23 +69,33 @@ end
 local oldBtn = createButton("Old", 0.08)
 local newBtn = createButton("New", 0.52)
 
+-- ✅ FIXED OLD BUTTON
 oldBtn.MouseButton1Click:Connect(function()
     oldBtn.Text = "Loading..."
-    loadstring(game:HttpGet("loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub2/refs/heads/main/MainLoader"))()", true))()
+
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub2/refs/heads/main/MainLoader"))()
+    end)
+
     oldBtn.Text = "Executed!"
     task.wait(1)
     gui:Destroy()
 end)
 
+-- NEW BUTTON (unchanged, just added safety)
 newBtn.MouseButton1Click:Connect(function()
     newBtn.Text = "Loading..."
 
     task.spawn(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Labullshittradefreeze/refs/heads/main/Tradefreeze"))()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Labullshittradefreeze/refs/heads/main/Tradefreeze"))()
+        end)
     end)
 
     task.spawn(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Bringvacktge-loac/refs/heads/main/Bru"))()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Bringvacktge-loac/refs/heads/main/Bru"))()
+        end)
     end)
 
     newBtn.Text = "Executed!"
