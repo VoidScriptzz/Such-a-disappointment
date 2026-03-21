@@ -1,0 +1,122 @@
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "VersionSelector"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 300, 0, 180)
+main.Position = UDim2.new(0.5, -150, 0.5, -90)
+main.BackgroundColor3 = Color3.fromRGB(10, 20, 45)
+main.BorderSizePixel = 0
+main.Parent = gui
+
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12)
+
+local stroke = Instance.new("UIStroke", main)
+stroke.Color = Color3.fromRGB(0, 170, 255)
+stroke.Thickness = 1.5
+
+local gradient = Instance.new("UIGradient", main)
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(15,30,80)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(5,10,25))
+}
+gradient.Rotation = 90
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.Text = "Select Version"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.TextColor3 = Color3.fromRGB(255,255,255)
+title.Parent = main
+
+local function createButton(text, posX)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.4, 0, 0, 50)
+    btn.Position = UDim2.new(posX, 0, 0.5, -25)
+    btn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+    btn.Text = text
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 16
+    btn.TextColor3 = Color3.fromRGB(255,255,255)
+    btn.BorderSizePixel = 0
+    btn.Parent = main
+
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
+
+    local s = Instance.new("UIStroke", btn)
+    s.Color = Color3.fromRGB(0,200,255)
+
+    btn.MouseEnter:Connect(function()
+        btn.BackgroundColor3 = Color3.fromRGB(0,170,255)
+        s.Color = Color3.fromRGB(120,220,255)
+    end)
+
+    btn.MouseLeave:Connect(function()
+        btn.BackgroundColor3 = Color3.fromRGB(0,140,255)
+        s.Color = Color3.fromRGB(0,200,255)
+    end)
+
+    return btn
+end
+
+local oldBtn = createButton("Old", 0.08)
+local newBtn = createButton("New", 0.52)
+
+oldBtn.MouseButton1Click:Connect(function()
+    oldBtn.Text = "Loading..."
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()
+    oldBtn.Text = "Executed!"
+    task.wait(1)
+    gui:Destroy()
+end)
+
+newBtn.MouseButton1Click:Connect(function()
+    newBtn.Text = "Loading..."
+
+    task.spawn(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Labullshittradefreeze/refs/heads/main/Tradefreeze"))()
+    end)
+
+    task.spawn(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Bringvacktge-loac/refs/heads/main/Bru"))()
+    end)
+
+    newBtn.Text = "Executed!"
+    task.wait(1)
+    gui:Destroy()
+end)
+
+local dragging = false
+local dragStart, startPos
+
+main.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = main.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - dragStart
+        main.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
