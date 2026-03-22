@@ -36,11 +36,11 @@ title.TextSize = 20
 title.TextColor3 = Color3.fromRGB(255,255,255)
 title.Parent = main
 
-local function createButton(text, posX)
+local function createButton(text, posX, isRed)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0.4, 0, 0, 50)
     btn.Position = UDim2.new(posX, 0, 0.5, -25)
-    btn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+    btn.BackgroundColor3 = isRed and Color3.fromRGB(200, 50, 50) or Color3.fromRGB(0, 140, 255)
     btn.Text = text
     btn.Font = Enum.Font.GothamBold
     btn.TextSize = 16
@@ -51,25 +51,37 @@ local function createButton(text, posX)
     Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
 
     local s = Instance.new("UIStroke", btn)
-    s.Color = Color3.fromRGB(0,200,255)
+    s.Color = isRed and Color3.fromRGB(255,100,100) or Color3.fromRGB(0,200,255)
 
     btn.MouseEnter:Connect(function()
-        btn.BackgroundColor3 = Color3.fromRGB(0,170,255)
-        s.Color = Color3.fromRGB(120,220,255)
+        if isRed then
+            btn.BackgroundColor3 = Color3.fromRGB(220, 70, 70)
+            s.Color = Color3.fromRGB(255,140,140)
+        else
+            btn.BackgroundColor3 = Color3.fromRGB(0,170,255)
+            s.Color = Color3.fromRGB(120,220,255)
+        end
     end)
 
     btn.MouseLeave:Connect(function()
-        btn.BackgroundColor3 = Color3.fromRGB(0,140,255)
-        s.Color = Color3.fromRGB(0,200,255)
+        if isRed then
+            btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+            s.Color = Color3.fromRGB(255,100,100)
+        else
+            btn.BackgroundColor3 = Color3.fromRGB(0,140,255)
+            s.Color = Color3.fromRGB(0,200,255)
+        end
     end)
 
     return btn
 end
 
-local oldBtn = createButton("Old", 0.08)
-local newBtn = createButton("New", 0.52)
+-- 🔴 Updated label here
+local oldBtn = createButton("(Unstable) Old", 0.08, true)
 
--- ✅ FIXED OLD BUTTON
+-- 🔵 New stays normal
+local newBtn = createButton("New", 0.52, false)
+
 oldBtn.MouseButton1Click:Connect(function()
     oldBtn.Text = "Loading..."
 
@@ -82,7 +94,6 @@ oldBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
--- NEW BUTTON (unchanged, just added safety)
 newBtn.MouseButton1Click:Connect(function()
     newBtn.Text = "Loading..."
 
