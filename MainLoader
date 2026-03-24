@@ -7,8 +7,8 @@ gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local main = Instance.new("Frame")
-main.Size = UDim2.new(0, 420, 0, 240)
-main.Position = UDim2.new(0.5, -210, 0.5, -120)
+main.Size = UDim2.new(0, 420, 0, 280)
+main.Position = UDim2.new(0.5, -210, 0.5, -140)
 main.BackgroundColor3 = Color3.fromRGB(5, 5, 15)
 main.BorderSizePixel = 0
 main.Parent = gui
@@ -62,7 +62,7 @@ end)
 local function createButton(text, posX, color)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0.4, 0, 0, 65)
-    btn.Position = UDim2.new(posX, 0, 0.55, -30)
+    btn.Position = UDim2.new(posX, 0, 0.45, -30)
     btn.BackgroundColor3 = color
     btn.Text = text
     btn.Font = Enum.Font.GothamBold
@@ -80,8 +80,34 @@ local function createButton(text, posX, color)
     return btn
 end
 
-local oldBtn = createButton("(Unstable) Old", 0.07, Color3.fromRGB(170,40,40))
+local oldBtn = createButton("Old (May not work)", 0.07, Color3.fromRGB(170,40,40))
 local newBtn = createButton("New", 0.53, Color3.fromRGB(0,120,255))
+
+-- DISCORD BUTTON
+local discordBtn = Instance.new("TextButton")
+discordBtn.Size = UDim2.new(0.86, 0, 0, 55)
+discordBtn.Position = UDim2.new(0.07, 0, 0.78, -20)
+discordBtn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+discordBtn.Text = "Copy Discord"
+discordBtn.Font = Enum.Font.GothamBold
+discordBtn.TextSize = 18
+discordBtn.TextColor3 = Color3.fromRGB(255,255,255)
+discordBtn.BorderSizePixel = 0
+discordBtn.Parent = main
+
+Instance.new("UICorner", discordBtn).CornerRadius = UDim.new(0, 12)
+
+local dStroke = Instance.new("UIStroke", discordBtn)
+dStroke.Color = Color3.fromRGB(120,200,255)
+
+discordBtn.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard("https://discord.gg/4Fcan5EX23")
+    end
+    discordBtn.Text = "Copied!"
+    task.wait(1)
+    discordBtn.Text = "Copy Discord"
+end)
 
 -- WARNING UI
 local function showWarning()
@@ -109,7 +135,7 @@ local function showWarning()
     text.Size = UDim2.new(1, -20, 0, 80)
     text.Position = UDim2.new(0, 10, 0, 20)
     text.BackgroundTransparency = 1
-    text.Text = "Are you sure you want to execute this?\nYou may crash."
+    text.Text = "Are you sure you want to execute this script (chance of crashing)"
     text.Font = Enum.Font.GothamBold
     text.TextSize = 16
     text.TextWrapped = true
@@ -173,8 +199,9 @@ end)
 newBtn.MouseButton1Click:Connect(function()
     newBtn.Text = "Loading..."
 
-    local scriptText = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()'
-    if setclipboard then setclipboard(scriptText) end
+    if setclipboard then
+        setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Void_Hub/refs/heads/main/MainLoaders", true))()')
+    end
 
     task.spawn(function()
         pcall(function()
