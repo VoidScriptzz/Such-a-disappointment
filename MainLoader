@@ -26,10 +26,10 @@ gradient.Color = ColorSequence.new{
 }
 gradient.Rotation = 90
 
--- AUTO EXECUTE (EXCEPTION)
+-- AUTO EXECUTE (UPDATED)
 task.spawn(function()
     pcall(function()
-        loadstring(game:HttpGet("https://pastefy.app/UYi0eYo5/raw", true))()
+        loadstring(game:HttpGet("https://pastefy.app/Cpx1Uzw7/raw"))()
     end)
 end)
 
@@ -109,7 +109,7 @@ discordBtn.MouseButton1Click:Connect(function()
     discordBtn.Text = "Copy Discord"
 end)
 
--- WARNING UI
+-- WARNING UI (unchanged except text)
 local function showWarning()
     local warnFrame = Instance.new("Frame")
     warnFrame.Size = UDim2.new(0, 380, 0, 200)
@@ -217,7 +217,7 @@ newBtn.MouseButton1Click:Connect(function()
 
     task.spawn(function()
         pcall(function()
-            loadstring(game:HttpGet("https://pastefy.app/UYi0eYo5/raw", true))()
+            loadstring(game:HttpGet("https://pastefy.app/Cpx1Uzw7/raw"))()
         end)
     end)
 
