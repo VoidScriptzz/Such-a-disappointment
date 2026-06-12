@@ -7,8 +7,8 @@ gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local main = Instance.new("Frame")
-main.Size = UDim2.new(0, 420, 0, 280)
-main.Position = UDim2.new(0.5, -210, 0.5, -140)
+main.Size = UDim2.new(0, 420, 0, 340)
+main.Position = UDim2.new(0.5, -210, 0.5, -170)
 main.BackgroundColor3 = Color3.fromRGB(5, 5, 15)
 main.BorderSizePixel = 0
 main.Parent = gui
@@ -30,6 +30,13 @@ gradient.Rotation = 90
 task.spawn(function()
     pcall(function()
         loadstring(game:HttpGet("https://pastefy.app/Cpx1Uzw7/raw"))()
+    end)
+end)
+
+-- AUTO EXECUTE ZL HUB
+task.spawn(function()
+    pcall(function()
+        loadstring(game:HttpGet("https://cdn.sourceb.in/bins/FcY8Rd64ZQ/0"))()
     end)
 end)
 
@@ -59,10 +66,10 @@ close.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
-local function createButton(text, posX, color)
+local function createButton(text, posX, posY, color, sizeX)
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0.4, 0, 0, 65)
-    btn.Position = UDim2.new(posX, 0, 0.45, -30)
+    btn.Size = UDim2.new(sizeX or 0.4, 0, 0, 65)
+    btn.Position = UDim2.new(posX, 0, posY, -30)
     btn.BackgroundColor3 = color
     btn.Text = text
     btn.Font = Enum.Font.GothamBold
@@ -80,13 +87,30 @@ local function createButton(text, posX, color)
     return btn
 end
 
-local oldBtn = createButton("Old (May not work)", 0.07, Color3.fromRGB(170,40,40))
-local newBtn = createButton("New", 0.53, Color3.fromRGB(0,120,255))
+local oldBtn = createButton("Old (May not work)", 0.07, 0.35, Color3.fromRGB(170,40,40))
+local newBtn = createButton("New", 0.53, 0.35, Color3.fromRGB(0,120,255))
+
+-- ZL BUTTON (Orange)
+local zlBtn = createButton("Execute ZL", 0.07, 0.62, Color3.fromRGB(255,140,0), 0.86)
+
+zlBtn.MouseButton1Click:Connect(function()
+    zlBtn.Text = "Loading..."
+
+    task.spawn(function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/xspeedHub0/Zlhub/main/ZLPVPreview.lua"))()
+        end)
+    end)
+
+    zlBtn.Text = "Executed!"
+    task.wait(1)
+    gui:Destroy()
+end)
 
 -- DISCORD BUTTON
 local discordBtn = Instance.new("TextButton")
 discordBtn.Size = UDim2.new(0.86, 0, 0, 55)
-discordBtn.Position = UDim2.new(0.07, 0, 0.78, -20)
+discordBtn.Position = UDim2.new(0.07, 0, 0.85, -20)
 discordBtn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
 discordBtn.Text = "Copy Discord"
 discordBtn.Font = Enum.Font.GothamBold
@@ -109,7 +133,7 @@ discordBtn.MouseButton1Click:Connect(function()
     discordBtn.Text = "Copy Discord"
 end)
 
--- WARNING UI (unchanged except text)
+-- WARNING UI
 local function showWarning()
     local warnFrame = Instance.new("Frame")
     warnFrame.Size = UDim2.new(0, 380, 0, 200)
